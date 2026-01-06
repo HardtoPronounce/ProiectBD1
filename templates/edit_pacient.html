@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+
+{% block title %}Editează pacient{% endblock %}
+
+{% block content %}
+  <div class="wrap">
+    <div class="header">
+      <h1>Editează pacient</h1>
+      <div>
+        <a class="btn secondary" href="{{ url_for('list_pacienti') }}">Înapoi</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <form method="post" action="{{ url_for('edit_pacient', id_pacient=pacient.id_pacient) }}">
+        <div class="form-row">
+          <label for="nume">Nume</label>
+          <input id="nume" class="form-control" name="nume" type="text" value="{{ pacient.nume }}" required>
+        </div>
+
+        <div class="form-row">
+          <label for="prenume">Prenume</label>
+          <input id="prenume" class="form-control" name="prenume" type="text" value="{{ pacient.prenume }}" required>
+        </div>
+
+        <div class="form-row">
+          <label for="data_nasterii">Data nașterii</label>
+          <input id="data_nasterii" class="form-control" name="data_nasterii" type="date" value="{{ pacient.data_nasterii }}" required>
+        </div>
+
+        <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
+          <a class="btn secondary" href="{{ url_for('list_pacienti') }}">Anulează</a>
+          <button class="btn" type="submit">Salvează</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

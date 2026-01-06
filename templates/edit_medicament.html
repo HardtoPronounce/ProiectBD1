@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block title %}Editează medicament{% endblock %}
+
+{% block content %}
+  <div class="wrap">
+    <div class="header">
+      <h1>Editează medicament</h1>
+      <div>
+        <a class="btn secondary" href="{{ url_for('list_medicamente') }}">Înapoi</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <form method="post" action="{{ url_for('edit_medicament', id_medicament=medicament.id_medicament) }}">
+        <div class="form-row">
+          <label for="denumire">Denumire</label>
+          <input id="denumire" class="form-control" name="denumire" type="text" value="{{ medicament.denumire }}" required>
+        </div>
+
+        <div class="form-row">
+          <label for="producator">Producător</label>
+          <input id="producator" class="form-control" name="producator" type="text" value="{{ medicament.producator }}" required>
+        </div>
+
+        <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
+          <a class="btn secondary" href="{{ url_for('list_medicamente') }}">Anulează</a>
+          <button class="btn" type="submit">Salvează</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
