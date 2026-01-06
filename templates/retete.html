@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{% block title %}Rețete{% endblock %}
+
+{% block content %}
+  <div class="wrap">
+    <div class="header">
+      <h1>Rețete</h1>
+      <div>
+        <a class="btn secondary" href="{{ url_for('index') }}">Înapoi acasă</a>
+        <a class="btn" href="{{ url_for('add_reteta') }}">Adaugă rețetă</a>
+      </div>
+    </div>
+
+    <div class="list" role="list" aria-label="Lista retete">
+      {% if retete %}
+        {% for r in retete %}
+          <div class="item" role="listitem">
+            <div class="info">
+              <div class="name">Pacient: {{ r.pacient.nume }} {{ r.pacient.prenume }}</div>
+              <div class="meta">Medicament: {{ r.medicament.denumire }} — Start: {{ r.data_start }} — Doză: {{ r.doza }}</div>
+            </div>
+            <div class="actions">
+              <a class="link" href="{{ url_for('edit_reteta', id_pacient=r.id_pacient, id_medicament=r.id_medicament) }}">Editează</a>
+              <form method="post" action="{{ url_for('delete_reteta', id_pacient=r.id_pacient, id_medicament=r.id_medicament) }}" onsubmit="return confirm('Ștergeți această rețetă?');">
+                <button type="submit" class="delete">Șterge</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>Nu există rețete în baza de date.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

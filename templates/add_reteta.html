@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+
+{% block title %}Adaugă rețetă{% endblock %}
+
+{% block content %}
+  <div class="wrap">
+    <div class="header">
+      <h1>Adaugă rețetă</h1>
+      <div>
+        <a class="btn secondary" href="{{ url_for('list_retete') }}">Înapoi</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <form method="post" action="{{ url_for('add_reteta') }}">
+        <div class="form-row">
+          <label for="id_pacient">Pacient</label>
+          <select id="id_pacient" class="form-control" name="id_pacient" required>
+            <option value="">-- Selectează pacient --</option>
+            {% for p in pacienti %}
+              <option value="{{ p.id_pacient }}">{{ p.nume }} {{ p.prenume }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="id_medicament">Medicament</label>
+          <select id="id_medicament" class="form-control" name="id_medicament" required>
+            <option value="">-- Selectează medicament --</option>
+            {% for m in medicamente %}
+              <option value="{{ m.id_medicament }}">{{ m.denumire }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="data_start">Data start</label>
+          <input id="data_start" class="form-control" name="data_start" type="date" required>
+        </div>
+
+        <div class="form-row">
+          <label for="doza">Doză</label>
+          <input id="doza" class="form-control" name="doza" type="text" required>
+        </div>
+
+        <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
+          <a class="btn secondary" href="{{ url_for('list_retete') }}">Anulează</a>
+          <button class="btn" type="submit">Adaugă</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
